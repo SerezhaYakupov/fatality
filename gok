@@ -1,1 +1,85 @@
-gok
+-- A-150
+
+coroutine.wrap(function()
+
+if game:GetService("ReplicatedStorage").GameData.Floor.Value == "Hotel" then
+
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Connect(function()
+
+for _, v in next, game.Workspace.CurrentRooms[game.ReplicatedStorage.GameData.LatestRoom.Value].Assets:GetDescendants() do
+
+    if v.Name == "Painting_Small" then
+
+local paintingchance = math.random(1, 10)
+
+if paintingchance == 1 then
+
+        local a = v:Clone()
+
+              a.Parent = v.Parent
+
+              a.Canvas.SurfaceGui.ImageLabel.Image = "rbxassetid://12471460355"
+
+              a.Canvas.SurfaceGui.ImageLabel.BackgroundTransparency = 1
+
+              a.Canvas.SurfaceGui.ImageLabel.BackgroundColor3 = Color3.fromRGB(159, 159, 159)
+
+              a.Canvas.SurfaceGui.ImageLabel.ImageTransparency = 0.5
+
+              a.Name = "Painting Easter Egg"
+
+              local b = a.InteractPrompt
+
+b.Triggered:Connect(function()
+
+require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption('This painting looks awkward...',true)
+
+wait(3)
+
+require(game.Players.LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game).caption('I think i might see this later in the future...',true)
+
+writefile("Oof's Impossible Mode Saves.oof", "PQbLAzPNLxczvCXV")
+
+end)
+
+        v:Destroy()
+
+end
+
+    end
+
+
+
+end
+
+end)
+
+elseif game:GetService("ReplicatedStorage").GameData.Floor.Value == "Rooms" then
+
+if isfile("Oof's Impossible Mode Saves.oof") then
+
+local pass = readfile("Oof's Impossible Mode Saves.oof")
+
+if pass == "PQbLAzPNLxczvCXV" then
+
+--[[ monster goes here ]]--
+
+while true do
+
+wait(75)
+
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+
+loadstring(game:HttpGet("https://github.com/PABMAXICHAC/doors-monsters-models/raw/main/a150"))()
+
+end
+
+--[[ ]]--
+
+end
+
+end
+
+end
+
+end)()
